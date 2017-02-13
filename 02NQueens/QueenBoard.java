@@ -1,0 +1,140 @@
+public class QueenBoard{
+    private int[][] board;
+    private int solutionCount;
+
+    public QueenBoard(int size){
+        board = new int[size][size];
+        for(int[] r : board){
+            for(int c : r){
+                r[c] = 0;
+            }
+        }
+    }
+
+    public boolean solve(){
+        return solveH(0);
+    }
+
+
+    private boolean solveH(int col){
+        System.out.println(this);
+
+        int row = 0;
+
+        if(col == board.length - 1){
+            while(row < board.length){
+                if(board[col][row] == 0){
+                    return true;
+                }
+                row++;
+            }
+            return false;
+        }
+
+        while(row < board.length){
+            if(board[col][row] == 0){
+
+                placeQueen(col, row);
+
+                if(!solveH(col + 1)){
+                    removeQueen(col, row);
+                    row++;
+                }
+                else{
+                    return true;
+                }
+            }
+            else{
+                row++;
+            }
+        }
+
+        return false;
+    }
+
+    private void placeQueen(int col, int row){
+        updateBoard(col, row);
+        board[col][row] = -1;
+    }
+
+    private void updateBoard(int col, int row){
+        for(int c = 0; c < board.length; c++){
+
+            if(board[c][row] != -1){
+                board[c][row] += 1;
+            }
+
+            if(board[col][c] != -1){
+                board[col][c] += 1;
+            }
+        }
+        int colDist = board.length - col;
+        int rowDist = board.length - row;
+
+        for(int cD = 0, rD = 0; cD < Math.min(colDist, rowDist) && rD < Math.min(colDist, rowDist); cD++, rD++){
+            if(board[col + cD][row + rD] != -1){
+                board[col + cD][row + rD] += 1;
+            }
+        }
+
+        for(int cD = 0, rD = 0; cD < Math.min(col, row); cD++, rD++){
+            if(board[col - cD][row - rD] != -1){
+                board[col - cD][row - rD] += 1;
+            }
+        }
+    }
+
+    private void removeQueen(int col, int row){
+        dUpdateBoard(col, row);
+        board[col][row] = 0;
+    }
+
+    private void dUpdateBoard(int col, int row){
+        for(int c = 0; c < board.length; c++){
+            if(board[c][row] != -1){
+                board[c][row] -= 1;
+            }
+            if(board[col][c] != -1){
+                board[col][c] -= 1;
+            }
+        }
+        int colDist = board.length - col;
+        int rowDist = board.length - row;
+        for(int cD = 0, rD = 0; cD < Math.min(colDist, rowDist) && rD < Math.min(colDist, rowDist); cD++, rD++){
+
+            if(board[col + cD][row + rD] != -1){
+                board[col + cD][row + rD] -= 1;
+            }
+        }
+
+        for(int cD = 1, rD = 1; cD < Math.min(col, row) && rD < Math.min(colDist, rowDist); cD++, rD++){
+
+            if(board[col - cD][row - rD] != -1){
+                board[col - cD][row - rD] -= 1;
+            }
+        }
+    }
+
+    public int getSolutionCount(){
+        return solutionCount;
+    }
+
+    public String toString(){
+        String toret = "";
+        for(int r = 0; r < board.length; r++){
+            for(int c = 0; c < board.length; c++){
+                toret += board[r][c] + "   ";
+            }
+            toret += "\n";
+        }
+        return toret;
+    }
+
+    public static void main(String[] args){
+        QueenBoard test = new QueenBoard(5);
+
+        test.solve();
+
+        System.out.println(test);
+    }
+}

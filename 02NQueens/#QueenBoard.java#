@@ -23,8 +23,15 @@ public class QueenBoard{
 
         int row = 0;
 
-        if(col == board.length){
-            return true;
+        if(col == board.length - 1){
+            while(row < board.length){
+                if(board[col][row] == 0){
+		    placeQueen(col, row);
+                    return true;
+                }
+                row++;
+            }
+            return false;
         }
 
         while(row < board.length){
@@ -52,39 +59,39 @@ public class QueenBoard{
 
     private void placeQueen(int col, int row){
         updateBoard(col, row);
-        board[col][row] = -1;
+        board[row][] = -1;
     }
 
     private void updateBoard(int col, int row){
         for(int c = 0; c < board.length; c++){
 
-            if(board[c][row] != -1){
-                board[c][row] += 1;
+            if(board[c][col] != -1){
+                board[c][col] += 1;
             }
 
-            if(board[col][c] != -1){
-                board[col][c] += 1;
+            if(board[row][c] != -1){
+                board[row][c] += 1;
             }
         }
         int colDist = board.length - col;
         int rowDist = board.length - row;
 
         for(int cD = 0, rD = 0; cD < Math.min(colDist, rowDist) && rD < Math.min(colDist, rowDist); cD++, rD++){
-            if(board[col + cD][row + rD] != -1){
-                board[col + cD][row + rD] += 1;
+            if(board[row + cD][col + rD] != -1){
+                board[row + cD][col + rD] += 1;
             }
         }
 
         for(int cD = 0, rD = 0; cD < Math.min(col, row); cD++, rD++){
-            if(board[col - cD][row - rD] != -1){
-                board[col - cD][row - rD] += 1;
+            if(board[row - cD][col - rD] != -1){
+                board[row - cD][col - rD] += 1;
             }
         }
     }
 
     private void removeQueen(int col, int row){
         dUpdateBoard(col, row);
-        board[col][row] = 0;
+        board[row][col] = 0;
     }
 
     private void dUpdateBoard(int col, int row){
@@ -129,7 +136,7 @@ public class QueenBoard{
     }
 
     public static void main(String[] args){
-        QueenBoard test = new QueenBoard(8);
+        QueenBoard test = new QueenBoard(5);
 
         test.solve();
 

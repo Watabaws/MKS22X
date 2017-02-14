@@ -10,7 +10,7 @@ public class QueenBoard{
             }
         }
 
-	
+
     }
 
     public boolean solve(){
@@ -36,6 +36,7 @@ public class QueenBoard{
                 if(!workd){
 		    System.out.println("Removing queen @ " + col + " " + row + " ");
                     removeQueen(col, row);
+                    System.out.println(this);
                     row++;
                 }
                 else{
@@ -66,19 +67,13 @@ public class QueenBoard{
                 board[col][c] += 1;
             }
         }
-        int colDist = board.length - col;
-        int rowDist = board.length - row;
 
-        for(int cD = 0, rD = 0; cD < Math.min(colDist, rowDist) && rD < Math.min(colDist, rowDist); cD++, rD++){
-            if(board[col + cD][row + rD] != -1){
-                board[col + cD][row + rD] += 1;
-            }
+        for(int offset = 1; col + offset < board.length && row + offset < board.length;offset++){
+            board[col + offset][row + offset] += 1;
         }
 
-        for(int cD = 0, rD = 0; cD < Math.min(col, row); cD++, rD++){
-            if(board[col - cD][row - rD] != -1){
-                board[col - cD][row - rD] += 1;
-            }
+        for(int offset = 0; col - offset > 0 && row - offset > 0; offset++){
+            board[col - offset][row - offset] += 1;
         }
     }
 
@@ -96,32 +91,60 @@ public class QueenBoard{
                 board[col][c] -= 1;
             }
         }
-        int colDist = board.length - col;
-        int rowDist = board.length - row;
-        for(int cD = 0, rD = 0; cD < Math.min(colDist, rowDist) && rD < Math.min(colDist, rowDist); cD++, rD++){
 
-            if(board[col + cD][row + rD] != -1){
-                board[col + cD][row + rD] -= 1;
+        for(int offset = 1; col + offset < board.length && row + offset < board.length; offset++){
+            board[col + offset][row + offset] -= 1;
+        }
+
+        for(int offset = 1; col - offset > 0 && row - offset > 0; offset++){
+            board[col - offset][row - offset] -= 1;
+	       }
+    }
+
+    public void countSolutions(){
+        countSolutionsH(0);
+    }
+
+    public boolean countSolutionsH(int col){
+        int row = 0;
+
+        if(col == board.length){
+            solutionCount += 1;
+            return false;
+        }
+
+        while(row < board.length){
+            if(board[col][row] == 0){
+                placeQueen(col, row);
+		        boolean workd = countSolutionsH(col + 1);
+                if(!workd){
+                    removeQueen(col, row);
+                    System.out.println(this);
+                    row++;
+                }
+                else{
+                    return true;
+                }
+            }
+            else{
+                row++;
             }
         }
 
-        for(int cD = 1, rD = 1; cD < Math.min(col, row) && rD < Math.min(colDist, rowDist); cD++, rD++){
-
-            if(board[col - cD][row - rD] != -1){
-                board[col - cD][row - rD] -= 1;
-            }
-	}
+        return false;
     }
 
     public int getSolutionCount(){
         return solutionCount;
     }
 
+
+
     public String toString(){
         String toret = "";
         for(int r = 0; r < board.length; r++){
             for(int c = 0; c < board.length; c++){
-                toret += board[r][c] + "   ";
+                toret += board[c][r] + "   ";
             }
             toret += "\n";
         }
@@ -131,8 +154,8 @@ public class QueenBoard{
     public static void main(String[] args){
         QueenBoard test = new QueenBoard(8);
 
-        test.solve();
+        test.countSolutions();
 
-        System.out.println(test);
+        System.out.println(test.getSolutionCount());
     }
 }

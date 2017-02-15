@@ -72,7 +72,15 @@ public class QueenBoard{
             board[col + offset][row + offset] += 1;
         }
 
-        for(int offset = 0; col - offset > 0 && row - offset > 0; offset++){
+        for(int offset = 1; col + offset < board.length && row - offset >= 0; offset++){
+            board[col + offset][row - offset] += 1;
+        }
+
+        for(int offset = 1; col - offset >= 0 && row + offset < board.length; offset++){
+            board[col - offset][row + offset] += 1;
+        }
+
+        for(int offset = 1; col - offset >= 0 && row - offset >= 0; offset++){
             board[col - offset][row - offset] += 1;
         }
     }
@@ -92,13 +100,21 @@ public class QueenBoard{
             }
         }
 
-        for(int offset = 1; col + offset < board.length && row + offset < board.length; offset++){
+        for(int offset = 1; col + offset < board.length && row + offset < board.length;offset++){
             board[col + offset][row + offset] -= 1;
         }
 
-        for(int offset = 1; col - offset > 0 && row - offset > 0; offset++){
+        for(int offset = 1; col + offset < board.length && row - offset >= 0; offset++){
+            board[col + offset][row - offset] -= 1;
+        }
+
+        for(int offset = 1; col - offset >= 0 && row + offset < board.length; offset++){
+            board[col - offset][row + offset] -= 1;
+        }
+
+        for(int offset = 1; col - offset >= 0 && row - offset >= 0; offset++){
             board[col - offset][row - offset] -= 1;
-	       }
+        }
     }
 
     public void countSolutions(){
@@ -154,8 +170,9 @@ public class QueenBoard{
     public static void main(String[] args){
         QueenBoard test = new QueenBoard(8);
 
+        //test.solve();
         test.countSolutions();
-
+        //test.placeQueen(4,4);
         System.out.println(test.getSolutionCount());
     }
 }

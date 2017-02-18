@@ -10,6 +10,11 @@ public class KnightBoard{
     }
 
     public boolean solveH(int row, int col, int level){	
+	System.out.println(this);
+	
+	if(level - 1 == board.length * board[0].length){
+	    return true;
+	}
 	try{
 	    if(board[row][col] != 0){
 		return false;
@@ -41,13 +46,7 @@ public class KnightBoard{
 		    }
 		}
 	      }
-	      else{
-		  if(level == board.length * board[0].length){
-		      board[row][col] = level;
-		      return true;
-		  }
-	      }
-	      return false;
+	      return true;
     }
 
     public String toString(){
@@ -76,3 +75,5 @@ public class KnightBoard{
     }
 
 }
+
+

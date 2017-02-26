@@ -5,6 +5,10 @@ public class KnightBoard{
 	       board = new int[startingRows][startingCols];
     }
 
+    public void solveFast(){
+        solveFastH(0, 0, 1);
+    }
+
     public void solve(){
 	       solveH(0, 0, 1);
     }
@@ -55,7 +59,7 @@ public class KnightBoard{
     }
 
     public static void main(String[] args){
-	KnightBoard test = new KnightBoard(7,7);
+	KnightBoard test = new KnightBoard(6,6);
 
 	test.solve();
 

@@ -58,7 +58,7 @@ public class KnightBoard{
             moveOrder[i] = new int[]{potMoves[i], i};
         }
 
-        System.out.println(twoDString(moveOrder));
+        //System.out.println(twoDString(moveOrder));
 
         //Thank you StackOverflow :~)
         Arrays.sort(moveOrder, new Comparator<int[]>() {
@@ -175,7 +175,7 @@ public class KnightBoard{
     public boolean solveH(int row, int col, int level){
 
     	if(level == board.length * board[0].length + 1){
-            System.out.println(this);
+            //System.out.println(this);
     	    return true;
     	}
 
@@ -205,11 +205,17 @@ public class KnightBoard{
     	for(int r = 0; r < board.length; r++){
     	    for(int c = 0; c < board.length; c++){
         		if(board[r][c] < 10){
-        		    toRet += " " + board[r][c];
+        		    toRet += "   " + board[r][c];
         		}
-        		else{
-        		    toRet += "" + board[r][c];
+        		else if(board[r][c] < 100){
+        		    toRet += "  " + board[r][c];
         		}
+                else if(board[r][c] < 1000){
+                    toRet += " " + board[r][c];
+                }
+                else{
+                    toRet += "" + board[r][c];
+                }
         		toRet += " ";
     	    }
     	    toRet += "\n";
@@ -218,7 +224,7 @@ public class KnightBoard{
     }
 
     public static void main(String[] args){
-	KnightBoard test = new KnightBoard(30, 30);
+	KnightBoard test = new KnightBoard(64, 64);
 
 	test.solveFast();
 

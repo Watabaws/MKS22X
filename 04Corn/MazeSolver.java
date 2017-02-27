@@ -4,12 +4,12 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class MazeSolver{
-    char[][] maze;
-    int startR, startC;
-    boolean animate = true;
+    private char[][] maze;
+    private int startR = -1, startC = -1;
+    private boolean animate, isEnd = false;
 
-    public MazeSolver() throws FileNotFoundException{
-        File infile = new File("Maze1.txt");// can be a path"/full/path/to/file.txt"
+    public MazeSolver(String file) throws FileNotFoundException{
+        File infile = new File(file);
         Scanner inf = new Scanner(infile);
         int lineNumber = 1;
         String line = "";
@@ -27,17 +27,26 @@ public class MazeSolver{
             maze[i] = line.substring(0, lineLen).toCharArray();
             line = line.substring(lineLen);
         }
-    }
 
-    public void solve(){
         for(int r = 0; r < maze.length; r++){
             for(int c = 0; c < maze[0].length; c++){
                 if(maze[r][c] == 'S'){
                     startR = r;
                     startC = c;
                 }
+                if(maze[r][c] == 'E'){
+                    isEnd = true;
+                }
             }
         }
+
+        if((startR == -1 && startC == -1) || !isEnd){
+            throw new FileNotFoundException("You are missing a start or end!");
+        }
+
+    }
+
+    public void solve(){
         solveH(startR, startC);
         System.out.println(this);
     }
@@ -48,10 +57,10 @@ public class MazeSolver{
 	    System.out.println("\033[2J\033[1;1H"+this);
 	    try{
 		//wait(20);
-		TimeUnit.MILLISECONDS.sleep(20);
+		TimeUnit.MILLISECONDS.sleep(50);
 	    }
 	    catch(InterruptedException e){}
-	    
+
 	 }
         if(maze[row][col] == 'E'){
             return true;
@@ -64,18 +73,14 @@ public class MazeSolver{
             maze[row][col] = '.';
         }
 
-        boolean dW1, dW2, dW3, dW4;
 
-        dW1 = solveH(row+1,col);
-        dW2 = solveH(row, col+1);
-        dW3 = solveH(row-1, col);
-        dW4 = solveH(row, col-1);
+        boolean dW = solveH(row+1,col) || solveH(row, col+1) || solveH(row-1, col) || solveH(row, col-1);
 
-        if(dW1 || dW2 || dW3 || dW4){
+        if(dW){
             maze[row][col] = '@';
         }
 
-        return dW1 || dW2 || dW3 || dW4;
+        return dW;
     }
 
     public void setAnimate(boolean b){
@@ -98,7 +103,7 @@ public class MazeSolver{
     }
 
     public static void main(String[] args) throws FileNotFoundException{
-        MazeSolver test = new MazeSolver();
+        MazeSolver test = new MazeSolver("Maze4.txt");
 
 	test.setAnimate(true);
 

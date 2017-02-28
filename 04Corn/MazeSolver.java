@@ -1,10 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class MazeSolver{
     char[][] maze;
     int startR, startC;
+    boolean animate = true;
 
     public MazeSolver() throws FileNotFoundException{
         File infile = new File("Maze1.txt");// can be a path"/full/path/to/file.txt"
@@ -40,8 +42,17 @@ public class MazeSolver{
         System.out.println(this);
     }
 
-    public boolean solveH(int row, int col){
-        System.out.println(this);
+
+    private boolean solveH(int row, int col){
+	if(animate){
+	    System.out.println("\033[2J\033[1;1H"+this);
+	    try{
+		//wait(20);
+		TimeUnit.MILLISECONDS.sleep(20);
+	    }
+	    catch(InterruptedException e){}
+	    
+	 }
         if(maze[row][col] == 'E'){
             return true;
         }
@@ -61,10 +72,18 @@ public class MazeSolver{
         dW4 = solveH(row, col-1);
 
         if(dW1 || dW2 || dW3 || dW4){
-            maze[row][col] = '-';
+            maze[row][col] = '@';
         }
 
         return dW1 || dW2 || dW3 || dW4;
+    }
+
+    public void setAnimate(boolean b){
+        animate = b;
+    }
+
+    public void clearTerminal(){
+        System.out.println("\033[2J\033[1;1H");
     }
 
     public String toString(){
@@ -81,7 +100,11 @@ public class MazeSolver{
     public static void main(String[] args) throws FileNotFoundException{
         MazeSolver test = new MazeSolver();
 
+	test.setAnimate(true);
+
         test.solve();
+
+	System.out.println(test);
     }
 
 

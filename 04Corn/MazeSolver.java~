@@ -110,7 +110,7 @@ public class MazeSolver{
         test.solve();
 
 	    System.out.println(test);
-		TimeUnit.MILLISECONDS.sleep(1000);
+		TimeUnit.MILLISECONDS.sleep(20);
     }
 
 

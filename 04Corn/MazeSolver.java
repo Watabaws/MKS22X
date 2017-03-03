@@ -95,6 +95,15 @@ public class MazeSolver{
         String toRet = "";
         for(int i = 0; i < maze.length; i++){
             for(int j = 0; j < maze[i].length; j++){
+		if(maze[i][j] == '#'){
+		    toRet += "\u001B[35m";
+		}
+		if(maze[i][j] == '@'){
+		    toRet += "\u001B[37m";
+		}
+		if(maze[i][j] == '.'){
+		    toRet += "\u001B[36m";
+		}
                 toRet += maze[i][j];
             }
             toRet += "\n";
@@ -110,7 +119,8 @@ public class MazeSolver{
         test.solve();
 
 	    System.out.println(test);
-		TimeUnit.MILLISECONDS.sleep(1000);
+	    System.out.println("\u001B[0m");
+	
     }
 
 

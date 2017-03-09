@@ -28,7 +28,7 @@ public class USACO{
                     pasture[counter][i] = Integer.parseInt(temp[i]);
                 }
                 counter++;
-                printTwoDAr(pasture);
+                //printTwoDAr(pasture);
             }
             moves = new int[numStomps][3];
             for(int i = 0; inf.hasNextLine(); i++){
@@ -36,7 +36,7 @@ public class USACO{
                 moves[i][1] = inf.nextInt();
                 moves[i][2] = inf.nextInt();
                 inf.nextLine();
-                printTwoDAr(moves);
+                //printTwoDAr(moves);
             }
 
             for(int[] ya: moves){
@@ -54,7 +54,7 @@ public class USACO{
                     }
                 }
             }
-            printTwoDAr(pasture);
+            //printTwoDAr(pasture);
 
             return calculateVol() * 5184;
         }

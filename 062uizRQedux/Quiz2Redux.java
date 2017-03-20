@@ -11,7 +11,7 @@ public class Quiz2Redux{
     }
 
     public static void help(String word, char[] s, ArrayList<String> words, int ind){
-        System.out.println(words);
+        //System.out.println(words);
         ind += 1;
         if(ind < s.length){
             help(word + s[ind], s, words, ind);

@@ -2,23 +2,25 @@ import java.util.*;
 
 public class Quick{
 
+    public static void quicksort(int[] arr){
+        qsh(arr, 0, arr.length-1);
+    }
+
+    public static void qsh(int[] arr, int left, int right){
+        System.out.println(Arrays.toString(arr));
+        if(left < right){
+            int p = part(arr, left, right);
+            qsh(arr, left, p-1);
+            qsh(arr, p, right);
+        }
+    }
+
     public static int quickselect(int[] data, int k){
         int ind = -1, start = 0, end = data.length-1;
         int[] tempData = new int[data.length];
         while(ind != k){
-            //System.out.println("");
-            //System.out.println("Start is: " + start + " End is: " + end);
             tempData = Arrays.copyOf(data, data.length);
-            //System.out.println("1" + Arrays.toString(tempData));
             ind = part(tempData, start, end);
-            //System.out.println(2 + Arrays.toString(tempData));
-            //System.out.println();
-            /*if(ind > k){
-                end = ind;
-            }
-            if(ind < k){
-                start = ind;
-            }*/
         }
         return tempData[ind];
     }
@@ -29,8 +31,9 @@ public class Quick{
         int partAroundInd = (int)(Math.random() * (end-start));
         int partAround = data[partAroundInd + start];
 
-        int startPart = 0, endPart = temp.length-1;
+        int startPart = start, endPart = end;
 
+        System.out.println("The partaround is: " + partAround);
         for(int i = start; i <= end; i++){
             if(i != partAroundInd){
                 if(data[i] > partAround){
@@ -43,7 +46,6 @@ public class Quick{
                 }
             }
         }
-        //System.out.println("The partaround is: " + partAround);
         temp[startPart] = partAround;
         for(int i = 0; i < temp.length; i++){
             data[i] = temp[i];
@@ -51,22 +53,18 @@ public class Quick{
         for(int i = 0; i < temp.length;i++){
             data[i] = temp[i];
         }
-        //System.out.println(Arrays.toString(data));
         return startPart;
     }
 
     public static void main(String[] args){
-        int[] test = new int[args.length-1];
-        int i;
-        for(i = 0; i < args.length - 1; i++){
+        //int[] test = new int[args.length-1];
+        int[] test = new int[args.length];
+        //int i;
+        for(int i = 0; i < args.length; i++){
             test[i] = Integer.parseInt(args[i]);
         }
-        //System.out.println(Arrays.toString(test));
-        //System.out.println("");
-        //part(test, 0, test.length);
-        //System.out.println("");
-        //System.out.println(Arrays.toString(test));
-
-        System.out.println(quickselect(test,Integer.parseInt(args[i])));
+        quicksort(test);
+        System.out.println(test);
+        //System.out.println(quickselect(test,Integer.parseInt(args[i])));
     }
 }

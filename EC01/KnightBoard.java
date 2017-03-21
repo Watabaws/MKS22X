@@ -224,7 +224,7 @@ public class KnightBoard{
     }
 
     public static void main(String[] args){
-	KnightBoard test = new KnightBoard(64, 64);
+	KnightBoard test = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[0]));
 
 	test.solveFast();
 

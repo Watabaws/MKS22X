@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Merge{
 
@@ -13,9 +14,6 @@ public class Merge{
 
     public static int[] mergeSortH(int[] arr){
         //System.out.println("Currarr is: " + Arrays.toString(arr));
-        if(arr.length == 2){
-            return merge(new int[]{arr[0]}, new int[]{arr[1]});
-        }
         if(arr.length == 1){
             return arr;
         }
@@ -81,6 +79,7 @@ public class Merge{
 
     }
 
+
     private static int[] unSortedMerge(int[] first, int[] second){
         int[] retoyn = new int[first.length + second.length];
 
@@ -95,36 +94,64 @@ public class Merge{
         return retoyn;
     }
 
+    public static int[] testList(int type){
+        int lenList = (int)(Math.random() * 20000 + 1000000);
+        int[] toRet = new int[lenList];
+        if(type == 0){
+            for(int i = 0; i < lenList; i++){
+                boolean isNeg = (int)(Math.random() * 2) % 2 == 0;
+                int num = (int)(Math.random() * Integer.MAX_VALUE);
+                if(isNeg){
+                    num *= -1;
+                }
+                toRet[i] = num;
+            }
+        }
+        else if(type == 1){
+            for(int i = 0; i < lenList; i++){
+                toRet[i] = (int)(Math.random() * 10);
+            }
+        }
+        else if(type == 2){
+            int num = (int)(Math.random() * Integer.MAX_VALUE);
+            for(int i = 0; i < lenList; i++){
+                toRet[i] = num;
+            }
+        }
+        else if(type == 3){
+            int[] srtd = testList(0);
+            Arrays.sort(srtd);
+            toRet = srtd;
+        }
+        else{
+            Integer[] revsrtd = new Integer[lenList];
+            for(int i = 0; i < lenList; i++){
+                revsrtd[i] = (int)(Math.random() * Integer.MAX_VALUE);
+            }
+            Arrays.sort(revsrtd, Collections.reverseOrder());
+            for(int i = 0; i < lenList; i++){
+                toRet[i] = revsrtd[i];
+            }
+        }
+
+        return toRet;
+
+    }
+
     public static void main(String[] args){
-        /*int[] testmerge1 = new int[args.length/2], testmerge2 = new int[args.length - args.length/2];
-        for(int i = 0; i < args.length/2; i++){
-            testmerge1[i] = Integer.parseInt(args[i]);
+        if(args.length == 0){
+            System.out.println("Please add a number to the end of java Merge to generate a list to be sorted. 0 will provide a completely randomized list, 1 will provide a random list with numbers ranging in value from 1 - 10, 2 will provide a list of the same number n times, 3 will provide a sorted list and anything else will provide a reverse sorted list. If you want to test each type of list 20 times, use this bash script: for i in {1..4}; do for j in {1..20}; do java Merge $i; done; done;");
         }
-        for(int i = args.length/2; i < args.length; i++){
-            testmerge2[i - args.length/2] = Integer.parseInt(args[i]);
-        }
-
-        Arrays.sort(testmerge1);
-        Arrays.sort(testmerge2);
-
-        int[] merged = merge(testmerge1, testmerge2);
-
-        System.out.println(Arrays.toString(merged));*/
-
-        int[] test = new int[args.length];
-        for(int i = 0; i < args.length; i++){
-            test[i] = Integer.parseInt(args[i]);
+        else{
+            int[] tbSrt = testList(Integer.parseInt(args[0]));
+            int[] srtd = new int[tbSrt.length];
+            System.arraycopy(tbSrt, 0, srtd, 0, tbSrt.length);
+            Arrays.sort(srtd);
+            mergesort(tbSrt);
+            //System.out.println(Arrays.toString(tbSrt));
+            //System.out.println(Arrays.toString(srtd));
+            System.out.println(Arrays.equals(srtd, tbSrt));
         }
 
-        /*System.out.println(Arrays.toString(test));
-        System.out.println(Arrays.toString(partitArray(test, 0, test.length/2 - 1)));
-        System.out.println(Arrays.toString(partitArray(test, test.length - test.length/2, test.length - 1)));*/
-
-        System.out.println("");
-        System.out.println(Arrays.toString(test));
-        mergesort(test);
-        System.out.println(Arrays.toString(test));
-    //    System.out.println(args.length);
-    //    System.out.println(test.length);
     }
 }

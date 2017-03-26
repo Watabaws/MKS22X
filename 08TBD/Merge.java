@@ -4,22 +4,29 @@ public class Merge{
 
     public static void mergesort(int[] arr){
         int[] sorted = mergeSortH(arr);
-        System.out.println(Arrays.toString(sorted));
-        System.out.println(Arrays.toString(arr));
-        for(int i = 0; i < sorted.length;i++){
+        //System.out.println(Arrays.toString(sorted));
+        //System.out.println(Arrays.toString(arr));
+        for(int i = 0; i < arr.length;i++){
             arr[i] = sorted[i];
         }
     }
 
     public static int[] mergeSortH(int[] arr){
-        System.out.println("Currarr is: " + Arrays.toString(arr));
+        //System.out.println("Currarr is: " + Arrays.toString(arr));
+        if(arr.length == 2){
+            return merge(new int[]{arr[0]}, new int[]{arr[1]});
+        }
         if(arr.length == 1){
             return arr;
         }
 
 
-        int[] leftHalf = partitArray(arr, 0, arr.length/2 - 1   );
-        int[] rightHalf = partitArray(arr, arr.length - (arr.length/2 + 1) , arr.length - 1 );
+        int[] leftHalf = partitArray(arr, 0, arr.length/2 - 1);
+        int lowBou = arr.length - arr.length/2;
+        if(arr.length % 2 == 1){
+            lowBou--;
+        }
+        int[] rightHalf = partitArray(arr, lowBou, arr.length - 1 );
         //System.out.println("Left is: " + Arrays.toString(leftHalf));
         //System.out.println("Right is: " + Arrays.toString(rightHalf));
 
@@ -114,9 +121,9 @@ public class Merge{
         System.out.println(Arrays.toString(partitArray(test, test.length - test.length/2, test.length - 1)));*/
 
         System.out.println("");
+        System.out.println(Arrays.toString(test));
         mergesort(test);
-
-    //    System.out.println(Arrays.toString(test));
+        System.out.println(Arrays.toString(test));
     //    System.out.println(args.length);
     //    System.out.println(test.length);
     }

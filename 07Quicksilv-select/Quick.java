@@ -38,9 +38,10 @@ public class Quick{
 
     public static int quickselect(int[] data, int k){
         int ind = -1, start = 0, end = data.length-1;
+        //System.out.println(Arrays.toString(data));
         while(start < end){
             //System.out.println("Start is: " + start + " End is: " + end);
-            ind = part(data, start, end);
+            ind = part(data, start, end, k);
             //System.out.println(Arrays.toString(data));
             if(ind < k){
                 start = ind + 1;
@@ -53,7 +54,7 @@ public class Quick{
         return data[start];
     }
 
-    public static int part(int[] data, int start, int end){
+    public static int part(int[] data, int start, int end, int k){
         int partAround = getPartValue(data, start, end);
         int partAroundVal = data[partAround];
         //System.out.println("The partaround is: " + partAroundVal);
@@ -76,6 +77,9 @@ public class Quick{
             }
         }
         //System.out.println(Arrays.toString(data));
+        if(data[k] == data[gt]){
+            return k;
+        }
         return gt;
     }
 

@@ -1,35 +1,46 @@
 public class MyLinkedList{
     private LNode start;
     private int size;
-
+    private LNode current;
 
     public MyLinkedList(){
-        start = new LNode();
-        size = 1;
+        start = null;
+        size = 0;
     }
 
     public int size(){
         return size;
     }
 
-    private boolean addBeginning(LNode tba){
-        tba.next = start;
-        start = tba;
+    private boolean addBeginning(int tba){
+        LNode toAdd = new LNode(tba, start);
+        start = toAdd;
         size++;
         return true;
+
     }
 
     public boolean add(int tba){
         current = start;
-        while(current.next != void){
+        if(size == 0){
+            start = new LNode(tba);
+            size = 1;
+            return true;
+        }
+        size++;
+        while(current.next != null){
             current = current.next;
         }
         current.next = new LNode(tba);
+        return true;
     }
 
     public int get(int index){
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
         current = start;
-        while(index == 0){
+        while(index != 0){
             current = current.next;
             index--;
         }
@@ -37,8 +48,11 @@ public class MyLinkedList{
     }
 
     public int set(int index, int newValue){
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
         current = start;
-        while(index == 0){
+        while(index != 0){
             current = current.next;
             index--;
         }
@@ -49,45 +63,119 @@ public class MyLinkedList{
 
     public int indexOf(int val){
         current = start;
-        ctr = 0;
-        while(current.value != val){
+        int ctr = 0;
+        while(current.next != null){
             current = current.next;
+            if(current.value == val){
+                return ctr;
+            }
             ctr++;
         }
-        return ctr;
+        if(current.value == val){
+            return ctr;
+        }
+        return -1;
     }
 
     public boolean add(int index, int value){
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        size++;
+        if(index == 0){
+            return addBeginning(value);
+        }
         current = start;
         for(int i = 0; i < index - 1; i++){
             current = current.next;
         }
+        LNode toBeAdded = new LNode(value, current.next);
+        current.next = toBeAdded;
+        return true;
+    }
+
+    public int remove(int index){
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        System.out.println(size);
+        if(size == 1){
+            int valyu = start.value;
+            start = null;
+            size = 0;
+            return valyu;
+        }
+        if(index == 0){
+            System.out.println("ADGDSGSDGSDHSD");
+            int valyu = start.value;
+            start = start.next;
+            size--;
+            return valyu;
+        }
+        current = start;
+        for(int i = 0; i < index-1; i++){
+            current = current.next;
+        }
+        LNode bobbitybooped = current.next;
+        int value = bobbitybooped.value;
+        current.next = bobbitybooped.next;
+        //And now bobbitybooped gets boobity booped.
+        size--;
+        return value;
 
     }
 
 
     public String toString(){
         LNode current = start;
+        System.out.println("Started");
         String toRet = "[";
-        toRet += current.value;
-        current = current.next;
-        while(current.next != null){
-            toRet += ", " + current.value;
-            current = current.next;
+        if(size != 0){
+            toRet += current.value;
+            System.out.println("Valued");
+            while(current.next != null){
+                current = current.next;
+                toRet += ", " + current.value;
+            }
         }
+        toRet += "]";
         return toRet;
+    }
+
+
+    public static void main(String[] args){
+        MyLinkedList test = new MyLinkedList();
+        System.out.println(test);
+
+        for(int i = 0; i < 10; i++){
+            test.add(i);
+            System.out.println(test.size);
+            System.out.println(test);
+        }
+
+        System.out.println(test);
+
+
+        /*for(int i = 0; i < 10; i++){
+            System.out.println(test.set(i, i + 15));
+        }
+
+        System.out.println(test);*/
+
+        for(int i = 0; i < 10; i++){
+            test.remove(0);
+            //System.out.println("Removed");
+            System.out.println(test);
+            System.out.println("");
+        }
     }
 
 private class LNode{
     private int value;
     private LNode next;
 
-    public LNode(){
-        value = 0;
-        next = null;
-    }
-
     public LNode(int val){
+        next = null;
         value = val;
     }
 
@@ -95,6 +183,9 @@ private class LNode{
         value = val;
         next = point;
     }
-}
 
+    public String toString(){
+        return ("My value is : " + value + "\nMy next is : " + next + '\n');
+    }
+}
 }

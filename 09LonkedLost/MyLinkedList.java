@@ -98,7 +98,7 @@ public class MyLinkedList{
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
-        System.out.println(size);
+        //System.out.println(size);
         if(size == 1){
             int valyu = start.value;
             start = null;
@@ -106,7 +106,7 @@ public class MyLinkedList{
             return valyu;
         }
         if(index == 0){
-            System.out.println("ADGDSGSDGSDHSD");
+            //System.out.println("ADGDSGSDGSDHSD");
             int valyu = start.value;
             start = start.next;
             size--;
@@ -128,11 +128,11 @@ public class MyLinkedList{
 
     public String toString(){
         LNode current = start;
-        System.out.println("Started");
+        //System.out.println("Started");
         String toRet = "[";
         if(size != 0){
             toRet += current.value;
-            System.out.println("Valued");
+            //System.out.println("Valued");
             while(current.next != null){
                 current = current.next;
                 toRet += ", " + current.value;
@@ -156,11 +156,11 @@ public class MyLinkedList{
         System.out.println(test);
 
 
-        /*for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
             System.out.println(test.set(i, i + 15));
         }
 
-        System.out.println(test);*/
+        System.out.println(test);
 
         for(int i = 0; i < 10; i++){
             test.remove(0);

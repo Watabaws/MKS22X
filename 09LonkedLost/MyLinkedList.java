@@ -1,5 +1,5 @@
 public class MyLinkedList{
-    private LNode start;
+    private LNode start, end;
     private int size;
     private LNode current;
 
@@ -12,14 +12,86 @@ public class MyLinkedList{
         return size;
     }
 
-    private boolean addBeginning(int tba){
-        LNode toAdd = new LNode(tba, start);
-        start = toAdd;
-        size++;
-        return true;
-
+    private LNode getNthNode(int n){
+	if(index < 0 || index >= size){
+	    throw new IndexOutOfBoundsException();
+	}
+	current = start;
+	while(n != 0){
+	    current = current.next;
+	}
+	return current;
     }
 
+    private void addAfter(LNode location, LNode toBeAdded){
+	
+    }
+
+    private void remove(LNode target){
+	if(target == start){
+	    
+	    
+	target.prev.next = target.next;
+	target.next.prev = target.prev;
+	//ByeBye.
+    }
+
+    public boolean add(int value){
+	if(size == 0){
+	    start = new LNode(value);
+	    size = 1;
+	    return true;
+	}
+	addAfter(end, new LNode(value));
+	return true;
+    }
+
+    public int get(int index){
+	return indexOf(getNthNode(index));
+    }
+
+    public int set(int index, int value){
+	int toRet = getNthNode(index).value;
+	getNthNode(index).value = value;
+	return toRet;
+    }
+
+    public int indexOf(int val){
+	if(value < size/2){
+	    current = start;
+	    int ctr = 0;
+	    while(current != null){
+		if(current.value == val){
+		    return ctr;
+		}
+		current = current.next;
+		ctr++;
+	    }
+	    return -1;
+	}
+	else{
+	    current = end;
+	    int ctr = 0;
+	     while(current != null){
+		if(current.value == val){
+		    return ctr;
+		}
+		current = current.prev;
+		ctr++;
+	    }
+	    return -1;
+	}
+	    
+    }
+
+    public int remove(int index){
+        remove(getNthNode(index));
+    }
+    
+    public void add(int index, int value){
+
+    }
+ 
     public boolean add(int tba){
         current = start;
         if(size == 0){
@@ -89,7 +161,7 @@ public class MyLinkedList{
         for(int i = 0; i < index - 1; i++){
             current = current.next;
         }
-        LNode toBeAdded = new LNode(value, current.next);
+        LNode toBeAdded = new LNode(value, current,  current.next);
         current.next = toBeAdded;
         return true;
     }
@@ -142,6 +214,17 @@ public class MyLinkedList{
         return toRet;
     }
 
+    private String deBugToString(){
+	String toRet = "";
+	current = start;
+	while(current != null){
+	    toRet += current.toString();
+	    current = current.next;
+	}
+	return toRet;
+
+    }
+
 
     public static void main(String[] args){
         MyLinkedList test = new MyLinkedList();
@@ -173,19 +256,22 @@ public class MyLinkedList{
 private class LNode{
     private int value;
     private LNode next;
+    private LNode prev;
 
     public LNode(int val){
         next = null;
+	prev = null;
         value = val;
     }
 
-    public LNode(int val, LNode point){
+    public LNode(int val, LNode point, LNode noint){
         value = val;
-        next = point;
+        prev = point;
+	next = noint;
     }
 
     public String toString(){
-        return ("My value is : " + value + "\nMy next is : " + next + '\n');
+        return ("(" + prev.value + ")" + value + "(" + next.value + ")" + " ");
     }
 }
 }

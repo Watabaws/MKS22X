@@ -163,12 +163,12 @@ public class Quick{
             int[] srtd = new int[tbSrt.length];
             System.arraycopy(tbSrt, 0, srtd, 0, tbSrt.length);
             Arrays.sort(srtd);
-            //quicksort(tbSrt);
+            quicksort(tbSrt);
             //System.out.println(Arrays.toString(tbSrt));
-            //System.out.println(Arrays.toString(srtd));
-            int k = (int)(Math.random() * tbSrt.length);
-            //System.out.println(Arrays.equals(srtd, tbSrt));
-            System.out.println(srtd[k] == quickselect(tbSrt, k));
+            ///System.out.println(Arrays.toString(srtd));
+            //int k = (int)(Math.random() * tbSrt.length);
+            System.out.println(Arrays.equals(srtd, tbSrt));
+            //System.out.println(srtd[k] == quickselect(tbSrt, k));
         }
 
         //System.out.println(quickselect(new int[]{1, 5, 4, 7, 2, 3, 9, 6, 8}, 1));

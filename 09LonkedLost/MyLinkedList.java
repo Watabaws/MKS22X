@@ -158,6 +158,15 @@ public class MyLinkedList implements Iterable<Integer>{
             test.add(i);
         }
 
+        System.out.println(test);
+
+        for(int i = 10; i > 0; i--){
+            test.remove(i);
+        }
+
+        System.out.println(test);
+
+
         LLIterator tesht = test.iterator();
         while(tesht.hasNext()){
             System.out.println(tesht.next());

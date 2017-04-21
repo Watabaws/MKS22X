@@ -151,26 +151,6 @@ public class MyLinkedList implements Iterable<Integer>{
 
 
     public static void main(String[] args){
-        MyLinkedList test = new MyLinkedList();
-        System.out.println(test);
-
-        for(int i = 0; i < 10; i++){
-            test.add(i);
-        }
-
-        System.out.println(test);
-
-        for(int i = 10; i > 0; i--){
-            test.remove(i);
-        }
-
-        System.out.println(test);
-
-
-        LLIterator tesht = test.iterator();
-        while(tesht.hasNext()){
-            System.out.println(tesht.next());
-        }
     }
 
 private class LNode{

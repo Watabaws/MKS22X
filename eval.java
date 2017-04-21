@@ -1,30 +1,52 @@
+import java.util.Stack;
+
 public class eval{
 
     public static double eval(String s){
         String[] tokens = s.split(" ");
-        stack values = new stack();
+        Stack values = new Stack<Double>();
         for(String token : tokens){
-            if(isNum(tokens[i])){
-                Double.parseDouble(values.push(tokens[i]));
+            if(isNum(token)){
+               values.push(Double.parseDouble(token));
             }
             else{
-                values.push(apply(tokens[i]), values.pop(), values.pop());
+                values.push(apply(token, (double)values.pop(), (double)values.pop()));
             }
         }
-        return values.pop();
+        return (double)values.pop();
     }
-
+    
     public static boolean isNum(String iq){
         try{
             Double.parseDouble(iq);
             return true;
         }
-        catch(//someexceptionimtootiredtolokup){
+        catch(NumberFormatException e){
             return false;
         }
-    }
+	}
 
     public static double apply(String op, Double a, Double b){
-        
+        if(op.equals("+")){
+	    return a + b;
+	}
+	else if(op.equals("-")){
+	    return b - a;
+	}
+	else if(op.equals("*")){
+	    return a * b;
+	}
+	else if(op.equals("*")){
+	    return a / b;
+	}
+	else{
+	    return a % b;
+	}   
+    }
+
+    public static void main(String[] args){
+	System.out.println(eval("10 2.0 +"));
+	System.out.println(eval("11 3 - 4 + 2.5 *"));
+	System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));
     }
 }

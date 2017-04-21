@@ -3,8 +3,8 @@ public class MyDeque{
     int front, back;
 
 
-    public boolean checkAdd(int index){
-	if(index 
+    // public boolean checkAdd(int index){
+    //	if(index 
 
     public String getFirst(){
 	return Dequerray[front];
@@ -22,6 +22,8 @@ public class MyDeque{
 	Dequerray[front+1] = bleh;
 	front = front+1 % Dequerray.length;
     }
+
+
 
 
        

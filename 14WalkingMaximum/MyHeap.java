@@ -26,8 +26,7 @@ public class MyHeap{
 
     public Integer remove(){
         Integer oldval = sheep.get(1);
-        sheep.set(1, sheep.remove(size));
-        size -= 1;
+        sheep.set(1, sheep.remove(size--));
         doAPushUpButStayDownSoItsNotReallyAPushup(1);
         return oldval;
     }
@@ -50,28 +49,30 @@ public class MyHeap{
     }
 
     private void doAPushUpButStayDownSoItsNotReallyAPushup(int index){
-        if(index * 2 + 1 <= size){
+        if(index * 2 <= size){
             Integer mwa = sheep.get(index);
             Integer chil1 = sheep.get(index * 2);
-            Integer chil2 = sheep.get(index * 2 + 1);
-            int maxVal;
-
-            if(actuallySortaUsefulCompareTo(chil1, chil2)){
-                maxVal = index * 2;
-                chil2 = chil1;
+            if(index * 2 + 1 <= size){
+                Integer chil2 = sheep.get(index * 2 + 1);
+                if(actuallySortaUsefulCompareTo(chil2, mwa)){
+                    sheep.set(index * 2 + 1, mwa);
+                    sheep.set(index, chil2);
+                    doAPushUpButStayDownSoItsNotReallyAPushup(index * 2 + 1);
+                }
+                else if(actuallySortaUsefulCompareTo(chil1, mwa)){
+                    sheep.set(index * 2, mwa);
+                    sheep.set(index, chil1);
+                    doAPushUpButStayDownSoItsNotReallyAPushup(index * 2);
+                }
             }
-            else{
-                maxVal = index * 2 + 1;
-                chil1 = chil2;
-            }
-
-            if(actuallySortaUsefulCompareTo(chil1, mwa)){
-                sheep.set(maxVal, mwa);
+            else if(actuallySortaUsefulCompareTo(chil1, mwa)){
+                sheep.set(index * 2, mwa);
                 sheep.set(index, chil1);
-                doAPushUpButStayDownSoItsNotReallyAPushup(maxVal);
+                doAPushUpButStayDownSoItsNotReallyAPushup(index * 2);
             }
 
         }
+
     }
 
     public String toStringAttemptFailure(){

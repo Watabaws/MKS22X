@@ -47,13 +47,23 @@ public class RunningMedian{
 
     private void balance(){
         if(Math.abs(maks.size - meen.size) > 1){
+            System.out.println("before balance: ");
+            System.out.println(maks.sheep);
+            System.out.println(meen.sheep);
             if(maks.size > meen.size){
-                meen.add(maks.remove());
+                int topMaks = maks.remove();
+                meen.add(topMaks);
             }
             else{
-                maks.add(meen.remove());
+                int topMeen = meen.remove();
+                System.out.println("tm is: " + topMeen);
+                maks.add(topMeen);
             }
+            System.out.println("after balance: ");
+            System.out.println(maks.sheep);
+            System.out.println(meen.sheep);
         }
+
     }
 
     private void updateSize(){
@@ -62,7 +72,7 @@ public class RunningMedian{
 
     public static void main(String[] args){
         RunningMedian test = new RunningMedian();
-        int[] testnum = {0, 2, 5, 6, 7, 234, 342};
+        int[] testnum = {0, 2, 5, 6, 7, 234, 342, 12, 567, 40, 25, 189, 9};
         for(int i : testnum){
         System.out.println(test.maks);
         System.out.println(test.meen);

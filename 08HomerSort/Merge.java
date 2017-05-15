@@ -137,21 +137,4 @@ public class Merge{
         return toRet;
 
     }
-
-    public static void main(String[] args){
-        if(args.length == 0){
-            System.out.println("Please add a number to the end of java Merge to generate a list to be sorted. 0 will provide a completely randomized list, 1 will provide a random list with numbers ranging in value from 1 - 10, 2 will provide a list of the same number n times, 3 will provide a sorted list and anything else will provide a reverse sorted list. If you want to test each type of list 20 times, use this bash script: for i in {1..4}; do for j in {1..20}; do java Merge $i; done; echo "";  done;");
-        }
-        else{
-            int[] tbSrt = testList(Integer.parseInt(args[0]));
-            int[] srtd = new int[tbSrt.length];
-            System.arraycopy(tbSrt, 0, srtd, 0, tbSrt.length);
-            Arrays.sort(srtd);
-            mergesort(tbSrt);
-            //System.out.println(Arrays.toString(tbSrt));
-            //System.out.println(Arrays.toString(srtd));
-            System.out.println(Arrays.equals(srtd, tbSrt));
-        }
-
-    }
 }

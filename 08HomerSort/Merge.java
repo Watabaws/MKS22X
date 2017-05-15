@@ -14,7 +14,7 @@ public class Merge{
 
     public static int[] mergeSortH(int[] arr){
         //System.out.println("Currarr is: " + Arrays.toString(arr));
-        if(arr.length == 1){
+        if(arr.length <= 1){
             return arr;
         }
 

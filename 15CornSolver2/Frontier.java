@@ -1,7 +1,9 @@
-public class Frontier{
-    
-    public void add(Location blah){}
+public interface Frontier{
 
-    public Location next(){}
+    public void add(Location blah);
+
+    public Location next();
+
+    public int size();
 
 }

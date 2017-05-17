@@ -1,0 +1,48 @@
+public void solve(int style){
+    //Switch statement
+    
+    ArrayList<Location> neighbors = getNeighbors(startLoc);
+    do{
+        for(Location dadaradun: neighbors){
+            frontear.add(dadaradun);
+        }
+        Location lumberjack = frontear.next();
+        if(lumberjack.equals(endLoc){
+            finishHim(lumberjack);
+        }
+        else{
+            board.set(lumberjack.getRow(), lumberjack.getCol(), '.');
+        }   
+    }
+    while(!finishded && frontear.size() > 0);
+}
+
+private Location[] getNeighbors(Location neigh2get){
+    ArrayList<Location> toret = new ArrayList<Location>();
+
+    int nowRow = neigh2get.getRow();
+    int nowCol = neight2get.getCol();
+
+    char top = board.get(nowRow - 1, nowCol);
+    char bottom = board.get(nowRow + 1, nowCol);
+    char left = board.get(nowRow, nowCol - 1);
+    char right = board.get(nowRow, nowCol + 1);
+
+    if(top == ' '){
+        toret.add(new Location(nowRow - 1, nowCol, neigh2get, dist(start, new Coordinate(nowRow - 1, nowCol), dist(end, new Coordinate(nowRow - 1, nowCol), aStur);
+    }
+    if(bottom = ' '){
+        toret.add(new Location(nowRow + 1, nowCol, neigh2get, dist(start, new Coordinate(nowRow + 1, nowCol), dist(end, new Coordinate(nowRow + 1, nowCol), aStur);
+    }    
+    if(left = ' '){
+        toret.add(new Location(nowRow, nowCol - 1, neigh2get, dist(start, new Coordinate(nowRow, nowCol - 1), dist(end, new Coordinate(nowRow, nowCol - 1), aStur);
+    }
+    if(right = ' '){
+        toret.add(new Location(nowRow, nowCol + 1, neigh2get, dist(start, new Coordinate(nowRow, nowCol + 1), dist(end, new Coordinate(nowRow, nowCol + 1), aStur);
+    }
+    return toret;
+}
+
+
+
+//////////Hey Adam you need to define your very own coordinate class so that you can calculate the distance to start and distance to end and define an instance boolean called /////////

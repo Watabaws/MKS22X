@@ -20,6 +20,10 @@ public class FrontierStack implements Frontier{
     }
 
     public int size(){
-        return size;
+        return locations.size();
+    }
+
+    public String toString(){
+	return locations.toString();
     }
 }

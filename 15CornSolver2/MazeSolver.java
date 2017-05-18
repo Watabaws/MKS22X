@@ -35,13 +35,17 @@ public class MazeSolver{
         Coordinate start = new Coordinate(startLoc.getRow(), startLoc.getCol());
         Coordinate end = new Coordinate(endLoc.getRow(), endLoc.getCol());
 
-        ArrayList<Location> neighbors = getNeighbors(startLoc, start, end);
+        
         do{
-            for(Location dadaradun: neighbors){
+	    ArrayList<Location> neighbors = getNeighbors(startLoc, start, end);
+	    System.out.println(board);
+            for(Location dadaradun : neighbors){
                 frontear.add(dadaradun);
             }
+	    System.out.println(frontear);
             Location lumberjack = frontear.next();
             if(lumberjack.equals(endLoc)){
+		System.out.println("doooone");
                 finishHim(lumberjack);
             }
             else{
@@ -88,5 +92,11 @@ public class MazeSolver{
 
     public int dist(Coordinate a, Coordinate b){
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+    }
+
+
+    public static void main(String[] args){
+	MazeSolver test = new MazeSolver(args[0]);
+	test.solve(new Integer(args[1]));
     }
 }

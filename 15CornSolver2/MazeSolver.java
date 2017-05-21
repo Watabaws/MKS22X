@@ -50,7 +50,7 @@ public class MazeSolver{
             for(Location dadaradun : neighbors){
                 frontear.add(dadaradun);
             }
-            //System.out.println(frontear);
+            System.out.println(frontear);
             Location lumberjack = frontear.next();
             if(lumberjack.equals(endLoc)){
                 finishHim(lumberjack);

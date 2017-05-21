@@ -9,16 +9,14 @@ public class FrontierPriorityQueue implements Frontier{
 
     public void add(Location blah){
         locations.add(blah);
-        size++;
     }
 
     public Location next(){
-        size--;
         return locations.remove();
     }
 
     public int size(){
-        return size;
+        return locations.size();
     }
 
     public String toString(){

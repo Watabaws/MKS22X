@@ -24,6 +24,6 @@ public class FrontierStack implements Frontier{
     }
 
     public String toString(){
-	return locations.toString();
+	       return locations.toString();
     }
 }

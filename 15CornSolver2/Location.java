@@ -38,4 +38,12 @@ public class Location implements Comparable<Location>{
             return other.distanceToGoal - distanceToGoal;
         }
     }
+
+    public String toString(){
+        return "[" + row + ", " + col + "]";
+    }
+
+    public boolean equals(Location other){
+        return (getRow() == other.getRow()) && (getCol() == other.getCol());
+    }
 }

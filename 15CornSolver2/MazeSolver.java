@@ -4,10 +4,15 @@ public class MazeSolver{
     private Maze board;
     private Frontier frontear;
     private boolean star;
-    private boolean finishded;
+    private boolean finishded, animate;
 
     public MazeSolver(String blah){
         board = new Maze(blah);
+    }
+
+    public MazeSolver(String blah, Boolean anm8){
+        board = new Maze(blah);
+        animate = anm8;
     }
 
     public void solve(){
@@ -17,7 +22,6 @@ public class MazeSolver{
     public void solve(int method){
         finishded = false;
         star = false;
-
         switch(method){
             case 0: frontear = new FrontierStack();
                     break;
@@ -35,24 +39,28 @@ public class MazeSolver{
         Coordinate start = new Coordinate(startLoc.getRow(), startLoc.getCol());
         Coordinate end = new Coordinate(endLoc.getRow(), endLoc.getCol());
 
-        
-        do{
-	    ArrayList<Location> neighbors = getNeighbors(startLoc, start, end);
-	    System.out.println(board);
+        ArrayList<Location> neighbors = getNeighbors(startLoc, start, end);
+        Location toAdd;
+        for(Location dadaradun : neighbors){
+            frontear.add(dadaradun);
+        }
+
+        while(!finishded && frontear.size() > 0){
+            //System.out.println(neighbors);
             for(Location dadaradun : neighbors){
                 frontear.add(dadaradun);
             }
-	    System.out.println(frontear);
+            //System.out.println(frontear);
             Location lumberjack = frontear.next();
             if(lumberjack.equals(endLoc)){
-		System.out.println("doooone");
                 finishHim(lumberjack);
             }
             else{
                 board.set(lumberjack.getRow(), lumberjack.getCol(), '.');
             }
+            neighbors = getNeighbors(lumberjack, start, end);
+            System.out.println(board);
         }
-        while(!finishded && frontear.size() > 0);
     }
 
     private void finishHim(Location end){
@@ -96,7 +104,7 @@ public class MazeSolver{
 
 
     public static void main(String[] args){
-	MazeSolver test = new MazeSolver(args[0]);
-	test.solve(new Integer(args[1]));
+	       MazeSolver test = new MazeSolver(args[0]);
+           test.solve(new Integer(args[1]));
     }
 }

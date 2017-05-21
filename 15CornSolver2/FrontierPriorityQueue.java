@@ -20,4 +20,8 @@ public class FrontierPriorityQueue implements Frontier{
     public int size(){
         return size;
     }
+
+    public String toString(){
+        return locations.toString();
+    }
 }

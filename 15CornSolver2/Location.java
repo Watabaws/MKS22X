@@ -3,6 +3,7 @@ public class Location implements Comparable<Location>{
     Location previous;
     int distanceToStart;
     int distanceToGoal;
+    int totDistance;
     boolean aStar;
 
     public Location(int r, int c , Location previous, int startDist, int goalDist){
@@ -11,6 +12,8 @@ public class Location implements Comparable<Location>{
         this.previous = previous;
         distanceToStart = startDist;
         distanceToGoal = goalDist;
+        totDistance = distanceToStart + distanceToGoal;
+
     }
 
     public Location(int r, int c , Location previous, int startDist, int goalDist, boolean AyStur){
@@ -19,6 +22,7 @@ public class Location implements Comparable<Location>{
         this.previous = previous;
         distanceToStart = startDist;
         distanceToGoal = goalDist;
+        totDistance = distanceToStart + distanceToGoal;
         aStar = AyStur;
     }
 
@@ -32,10 +36,10 @@ public class Location implements Comparable<Location>{
 
     public int compareTo(Location other){
         if(aStar){
-            return (other.distanceToStart + other.distanceToGoal) - (distanceToStart + distanceToGoal);
+            return totDistance - other.totDistance;
         }
         else{
-            return other.distanceToGoal - distanceToGoal;
+            return  distanceToGoal - other.distanceToGoal ;
         }
     }
 

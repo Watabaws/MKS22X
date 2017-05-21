@@ -1,10 +1,12 @@
 import java.util.*;
 public class FrontierPriorityQueue implements Frontier{
-    private MyHeap locations;
+    //private MyHeap locations;
+    private PriorityQueue<Location> locations;
     private int size;
 
     public FrontierPriorityQueue(){
-        locations = new MyHeap();
+        //locations = new MyHeap(false);
+        locations = new PriorityQueue<Location>();
     }
 
     public void add(Location blah){

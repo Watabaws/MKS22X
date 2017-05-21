@@ -26,7 +26,7 @@ public class MyHeap{
 
     public Location remove(){
         Location oldval = sheep.get(1);
-        if(size >= 1){
+        if(size > 1){
             sheep.set(1, sheep.remove(size--));
             doAPushUpButStayDownSoItsNotReallyAPushup(1);
         }
@@ -38,7 +38,7 @@ public class MyHeap{
     }
 
     private boolean actuallySortaUsefulCompareTo(Location a, Location b){
-        return (a.compareTo(b) * Constant) >= 0;
+        return (a.compareTo(b) * Constant) > 0;
     }
 
     public int size(){

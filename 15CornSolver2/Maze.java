@@ -29,6 +29,7 @@ public class Maze{
   public void clearTerminal(){
     System.out.println(CLEAR_SCREEN+"\033[1;1H");
   }
+
   public Maze(String filename){
     ArrayList<char[]> lines = new ArrayList<char[]>();
     int startr=-1, startc=-1;

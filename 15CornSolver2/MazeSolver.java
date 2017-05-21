@@ -50,7 +50,7 @@ public class MazeSolver{
             for(Location dadaradun : neighbors){
                 frontear.add(dadaradun);
             }
-            System.out.println(frontear);
+            //System.out.println(frontear);
             Location lumberjack = frontear.next();
             if(lumberjack.equals(endLoc)){
                 finishHim(lumberjack);
@@ -59,8 +59,14 @@ public class MazeSolver{
                 board.set(lumberjack.getRow(), lumberjack.getCol(), '.');
             }
             neighbors = getNeighbors(lumberjack, start, end);
+            if(animate){
+                System.out.println(board.toString(10));
+            }
+        }
+        if(!animate){
             System.out.println(board);
         }
+
     }
 
     private void finishHim(Location end){
@@ -104,7 +110,7 @@ public class MazeSolver{
 
 
     public static void main(String[] args){
-	       MazeSolver test = new MazeSolver(args[0]);
-           test.solve(new Integer(args[1]));
+        MazeSolver test = new MazeSolver(args[0], true);
+        test.solve(new Integer(args[1]));
     }
 }

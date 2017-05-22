@@ -44,7 +44,7 @@ public class MazeSolver{
         for(Location dadaradun : neighbors){
             frontear.add(dadaradun);
         }
-
+        int ctr = 0;
         while(!finishded && frontear.size() > 0){
             //System.out.println(neighbors);
             for(Location dadaradun : neighbors){
@@ -63,6 +63,8 @@ public class MazeSolver{
                 System.out.println(board.toString(10));
             }
         }
+        System.out.println(frontear.size());
+        System.out.println(frontear);
         if(!animate){
             System.out.println(board);
         }

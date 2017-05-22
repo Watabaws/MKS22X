@@ -30,6 +30,9 @@ public class MyHeap{
             sheep.set(1, sheep.remove(size--));
             doAPushUpButStayDownSoItsNotReallyAPushup(1);
         }
+        else{
+            sheep.remove(size--);
+        }
         return oldval;
     }
 
@@ -104,7 +107,7 @@ public class MyHeap{
 
     public String toString(){
         String toret = "";
-        for(int i = 1; i <= size; i++){
+        for(int i = 1; i < sheep.size(); i++){
             Location topr = sheep.get(i);
             toret += topr + " ";
         }

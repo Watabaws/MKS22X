@@ -28,22 +28,23 @@ public class StackCalc{
 
     public static double apply(String op, Double a, Double b){
         if(op.equals("+")){
-	    return a + b;
-	}
-	else if(op.equals("-")){
-	    return b - a;
-	}
-	else if(op.equals("*")){
-	    return a * b;
-	}
-	else if(op.equals("*")){
-	    return a / b;
-	}
-	else{
-	    return a % b;
-	}
+            return a + b;
+        }
+        else if(op.equals("-")){
+            return b - a;
+        }
+        else if(op.equals("*")){
+            return a * b;
+        }
+        else if(op.equals("/")){
+            return b / a;
+        }
+        else{
+            return a % b;
+        }
     }
 
     public static void main(String[] args){
+        System.out.println(StackCalc.eval("47 969 / 0 - 769 -"));
     }
 }

@@ -7,7 +7,7 @@ public class MazeSolver{
     private boolean finishded, animate;
 
     public MazeSolver(String blah){
-        board = new Maze(blah);
+        this(blah, false);
     }
 
     public MazeSolver(String blah, Boolean anm8){
@@ -16,7 +16,7 @@ public class MazeSolver{
     }
 
     public void solve(){
-        frontear = new FrontierQueue();
+        solve(1);
     }
 
     public void solve(int method){
@@ -63,11 +63,6 @@ public class MazeSolver{
                 System.out.println(board.toString(10));
             }
         }
-        System.out.println(frontear.size());
-        System.out.println(frontear);
-        if(!animate){
-            System.out.println(board);
-        }
 
     }
 
@@ -110,9 +105,18 @@ public class MazeSolver{
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
     }
 
+    public String toString(){
+        return board.toString();
+    }
+
+    public String toString(int n){
+        return board.toString(n);
+    }
+
 
     public static void main(String[] args){
-        MazeSolver test = new MazeSolver(args[0], true);
-        test.solve(new Integer(args[1]));
+        MazeSolver test = new MazeSolver(args[0]);
+        test.solve(1);
+        String ans = test.toString();
     }
 }

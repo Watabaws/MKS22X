@@ -57,11 +57,15 @@ public class Test10{
 
   public static void main(String[]args){
         int testNum = new Integer(args[0]);
+        int yarg = new Integer(args[1]);
+        if (yarg % 2 == 1){
+            yarg++;
+        }
         if(testNum>=0 && testNum <4){
-          testCreation(args[0],new Integer(args[1]));
+          testCreation(args[0],yarg);
         }
         if(testNum>=4 && testNum <6){
-          testException(args[0],new Integer(args[1]));
+          testException(args[0],yarg);
         }
 
   }

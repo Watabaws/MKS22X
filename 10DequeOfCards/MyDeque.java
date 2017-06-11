@@ -1,4 +1,4 @@
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class MyDeque{
     String[] Dequerray;
@@ -18,8 +18,9 @@ public class MyDeque{
         int ctr = 0;
         while(ind != back){
             temp[ctr] = Dequerray[ind];
-            ind = (ind + 1) % size;
+            ind = (ind + 1) % size - 1;
             ctr++;
+            ind++;
         }
         temp[ctr] = Dequerray[ind];
         front = 0;
@@ -38,14 +39,13 @@ public class MyDeque{
         if(size == 0){
             throw new NoSuchElementException();
         }
-	       return Dequerray[back];
+	    return Dequerray[back];
     }
 
     public void addFirst(String bleh){
     	if(bleh == null){
     	    throw new NullPointerException();
     	}
-
         if(Dequerray.length != 0){
             int potNF = (front - 1) % Dequerray.length;
             if(potNF < 0){
@@ -56,30 +56,9 @@ public class MyDeque{
                 resizeArray();
                 addFirst(bleh);
             }
-            Dequerray[potNF] = bleh;
-            front = potNF;
-        }
-        else{
-            Dequerray = new String[]{bleh};
-        }
-        size++;
-    }
-
-    public void addLast(String bleh){
-        if(bleh == null){
-    	    throw new NullPointerException();
-    	}
-        if(Dequerray.length != 0){
-            int potNE = (back + 1) % Dequerray.length;
-
-            if(potNE == front){
-                resizeArray();
-                Dequerray[back + 1] = bleh;
-                size++;
-            }
             else{
-                Dequerray[potNE] = bleh;
-                back = potNE;
+                Dequerray[potNF] = bleh;
+                front = potNF;
                 size++;
             }
         }
@@ -89,13 +68,33 @@ public class MyDeque{
         }
     }
 
-    public void stringit(){
+    public void addLast(String bleh){
+        if(bleh == null){
+    	    throw new NullPointerException();
+    	}
+        if(Dequerray.length != 0){
+            if((back + 1) % Dequerray.length == front){
+                resizeArray();
+            }
+
+            int potNE = (back + 1) % Dequerray.length;
+            Dequerray[potNE] = bleh;
+            back = potNE;
+            size++;
+        }
+        else{
+            Dequerray = new String[]{bleh};
+            size = 1;
+        }
+    }
+
+    public String toString(){
         String toret = "[";
         for(int i = 0; i < size; i++){
-            toret += Dequerray[i];
+            toret += Dequerray[i] + ", ";
         }
         toret += "]";
-        System.out.println(toret);
+        return toret;
     }
 
     public String removeFirst(){
@@ -118,7 +117,7 @@ public class MyDeque{
 
         int potNEI = (back - 1) % Dequerray.length;
         if(potNEI < 0){
-            potNEI = Dequerray.length - potNEI;
+            potNEI = Dequerray.length + potNEI;
         }
 
         String olval = Dequerray[back];
